@@ -1,6 +1,18 @@
-export default () => (
-    <>
-    <h1> Venha comprar com a gente </h1>
-    <p >garanta ja </p>
-    </>
-);
+import db from "@/lib/db"
+export default async () => {
+    const usuario = await db.query("select * from usuario")
+ return (<>
+    <h1>Lista de usuarios</h1>
+    <div>
+      {
+         usuario.rows.map( 
+            a => (
+               <div key={a.id}>
+                  {a.nome} faz parte do projeto {a.cargo}
+               </div>
+            ) 
+         )
+      }
+   </div>
+ </>);
+}
